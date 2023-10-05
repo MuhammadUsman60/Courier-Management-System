@@ -1,0 +1,12 @@
+Four portions
+
+spinner
+navbar
+sidebar
+footer
+
+include into files
+
+these files have been commented name over and below them so that you can easly recognize them 
+roger do you copy
+for any help call me direct ok

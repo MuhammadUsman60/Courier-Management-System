@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <?php
+        include "./dbconnent.php";
+        include "./session.php";
+        include "spinner.php";
+        ?>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <?php
+            include "sidebar.php";
+            ?>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+
+            <!-- Navbar Start -->
+            <?php
+            include "navbar.php";
+            ?>
+            <!-- Navbar End -->
+
+
+            <!-- Couriers Data Start -->
+            <div class="container-fluid pt-4 px-4">
+            <div class="row g-2">
+                <div class="col-sm-6 col-xl-6">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-cube fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Courier</p>
+                            <h6 class="mb-0"><?php 
+                            include "./dbconnent.php";
+                            $sql = "SELECT COUNT(*) AS status
+                            FROM shipper_details;";
+                            $result = mysqli_query($conn,$sql);
+                            $row = mysqli_fetch_assoc($result);
+                            $count = $row['status'];
+                            echo $count;
+                            ?></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-6">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-check-square fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Delivered Courier</p>
+                            <h6 class="mb-0"><?php 
+                           $sql = "SELECT COUNT(*) AS status
+                           FROM shipper_details
+                           WHERE status = 'Completed';";
+                             $result = mysqli_query($conn,$sql);
+                             $row2 = mysqli_fetch_assoc($result);
+                             $count = $row2['status'];
+                             echo $count;
+                            ?></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-6">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-calendar fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Pending Couriers</p>
+                            <h6 class="mb-0"><?php 
+                           $sql = "SELECT COUNT(*) AS status
+                           FROM shipper_details
+                           WHERE status = 'Pending';";
+                             $result = mysqli_query($conn,$sql);
+                             $row2 = mysqli_fetch_assoc($result);
+                             $count = $row2['status'];
+                             echo $count;
+                            ?></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-6">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-truck fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Transporting Courier</p>
+                            <h6 class="mb-0"><?php 
+                           $sql = "SELECT COUNT(*) AS status
+                           FROM shipper_details
+                           WHERE status = 'Transporting';";
+                             $result = mysqli_query($conn,$sql);
+                             $row2 = mysqli_fetch_assoc($result);
+                             $count = $row2['status'];
+                             echo $count;
+                            ?></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- Couriers Data End -->
+            <br><br><br>
+            <hr>
+
+            <!-- Qoute for Admin -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="col-sm-8 col-xl-12">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4"></h6>
+                        <div class="border rounded p-4 pb-0 mb-4">
+                            <figure>
+                                <blockquote class="blockquote">
+                                    <p>Here you are Admin!</p>
+                                </blockquote>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Qoute for Admin end -->
+
+            <!-- Flex Start -->
+            <div class="container-fluid pt-4 px-4" style="margin-top: 80px; min-height: 30vh;">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-6">
+
+                        <a href="addCourierPerson.php" id="link">
+                            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                <i> <img src="pic/flex/add.png" style="filter: invert(100%);"> </i>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Add Courier Person</h6>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div class="col-sm-6 col-xl-6">
+
+                        <a href="SchedualCourier.php" id="link">
+                            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                <i> <img src="pic/flex/box.png" style="filter: invert(100%);"> </i>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Schedual Courier</h6>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-6 col-xl-6">
+
+                        <a href="track.php" id="link">
+                            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                <i> <img src="pic/flex/tracking.png" style="filter: invert(100%);"> </i>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Track Couriers</h6>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-6 col-xl-6">
+
+                        <a href="couriersList.php" id="link">
+                            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                <i> <img src="pic/flex/clipboard.png" style="filter: invert(100%);"> </i>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Couriers List</h6>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-6 col-xl-12">
+
+                        <a href="CourierPersonsList.php" id="link">
+                            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                <i> <img src="pic/flex/employee.png" style="filter: invert(100%);"> </i>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Courier Persons List</h6>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Flex End -->
+
+            <br><br><br><br>
+            <!-- Footer Start -->
+            <?php
+            include "footer.php";
+            ?>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
